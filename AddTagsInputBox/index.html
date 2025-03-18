@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style type="text/tailwindcss">
+      @theme {
+        --color-clifford: #da373d;
+      }
+    </style>
+  </head>
+  <body class="bg-blue-500">
+    <h1 class="text-3xl text-center font-bold underline text-clifford">
+     Add Tags!
+    </h1>
+
+    <div class="flex justify-center item-center">
+        
+    <div class="w-lg bg-white p-6  rounded-2xl shadow-lg">
+
+        <h2 class="text-lg font-semibold flex item-center gap-2">
+           Tags
+        </h2>
+        
+        <p class="text-sm text-gray-500">Press enter or add a comma after each tag</p>
+ 
+        <div id="tag-container" class="border rounded-lg p-2 mt-2 flex flex-wrap gap-2 min-h-[50px]">
+            <!-- Tags will be added here dynamically -->
+        </div>
+        
+        <input id="tag-input" type="text" class="w-full p-2 border rounded mt-2" placeholder="Add a tag...">
+        
+        <div class="flex justify-between items-center mt-4">
+            <span id="tag-count" class="text-sm text-gray-600">0 tags are remaining</span>
+            <button id="remove-all" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-all">
+                Remove All
+            </button>
+        </div>
+
+    </div>
+
+    </div>
+    
+
+
+  </body>
+</html>
+
+
+<script>
+  const tagInput = document.getElementById("tag-input");
+  const tagContainer = document.getElementById("tag-container");
+  const tagCount = document.getElementById("tag-count");
+  const removeAllBtn = document.getElementById("remove-all");
+
+  const tags =[];
+  tagInput.addEventListener("keydown", function(event){
+  //keydown event occurs when the user presses a key on the keyboard.
+
+    if(event.key === 'Enter'){
+      event.preventDefault();
+      console.log(event)
+      // Split input by commas, trim spaces, and filter out empty values
+      const tagTexts = tagInput.value.split(",").map(tag => tag.trim()).filter(tag => tag);
+
+      console.log(tagTexts);
+      console.log(tags)
+      // Add each tag separately if it's not already in the array
+        tagTexts.forEach(tag => {
+            if (!tags.includes(tag)) {
+                tags.push(tag);
+            }
+        });
+
+        updateTags();
+        tagInput.value = "";
+    }
+
+
+  });
+
+  function updateTags(){
+    tagContainer.innerHTML="";
+    tags.forEach((tag,index)=>{
+      const tagElement= document.createElement("div");
+      tagElement.className="bg-gray-200 text-gray-800 px-3 py-1 rounded-full flex items-center";
+      tagElement.innerHTML = `${tag} <button onclick="removeTag(${index})" class="ml-2 text-gray-500 hover:text-red-500">&times;</button>`;
+      tagContainer.appendChild(tagElement);
+    });
+    tagCount.textContent = `${tags.length} tags are remaining`;
+  }
+
+  function removeTag(index) {
+            tags.splice(index, 1);
+            updateTags();
+        }
+
+        removeAllBtn.addEventListener("click", function () {
+            tags = [];
+            updateTags();
+        });
+</script>
+
+<!-- Explanation of Tailwind CSS Classes Used --
+
+  1. max-w-md → Limits max width to medium size. 
+  2.bg-white → Sets the background to white.
+  3.p-6 → Adds padding of 1.5rem.
+  4.rounded-2xl → Rounds the corners with extra-large radius.
+  5.shadow-lg → Adds a large shadow effect.
+  
+  
+-->

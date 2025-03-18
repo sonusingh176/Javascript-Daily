@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calendar with Participants</title>
+
+
+  <style>
+    .participant-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      margin-right: 5px;
+    }
+    .participants {
+      display: flex;
+      margin-top: 5px;
+    }
+    .fc-event-title {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+    <h1>Full Calendar</h1>
+  <div id="calendar"></div>
+
+  <!-- FullCalendar and Dependencies CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.15/index.global.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.0/main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction@6.1.0/main.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const calendarEl = document.getElementById('calendar')
+const calendar = new Calendar(calendarEl, {
+  plugins: [
+    dayGridPlugin
+    // any other plugins
+  ],
+  initialView: 'dayGridMonth',
+  weekends: false,
+  events: [
+    { title: 'Meeting', start: new Date() }
+  ]
+})
+
+calendar.render()
+    });
+  </script>
+
+</body>
+</html>
