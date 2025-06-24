@@ -1,8 +1,9 @@
 /**
- *   3 Ways to Copy Objects in JavaScript
+ *   4 Ways to Copy Objects in JavaScript
  *     1.) Use the spread (...) syntax
  *     2.) Use the Object.assign() method
  *     3.) Use the JSON.stringify() and JSON.parse() methods
+ *     4.) Using Recursion (write your own code)
  * 
  * 
  */
