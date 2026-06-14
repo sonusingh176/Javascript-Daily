@@ -4,26 +4,42 @@
 
 //ans - A simple promise based delay function in js can be implemented using setTimeout and Promise.
 
-function delay(ms){
-    return new Promise((resolve,reject)=>{
-        if(ms<0){
-            reject("Time can not be negative");
-            return;
-        }
+console.log("start");
 
-        setTimeout(()=>{
-            resolve(`Completed after ${ms} ms`);
-        },ms)
-    });
+function delay(){
+  return new Promise((resolve,reject)=>{
+    
+
+     setTimeout(()=>{
+      resolve("promise resolved")
+     },4000)
+      // reject("promise reject")
+  })
 }
 
-console.log("start")
-
-delay(1000).then((message)=>{
-console.log(message);
-}).catch((error)=>{
-    console.log(error);
+const pt=delay().then((message)=>{
+  console.log(message);
+}).catch((message)=>{
+  console.log(message);
 });
 
 
-console.log("End")
+console.log("end");
+
+// ===========================================================
+
+//we can't write like this , because setTimeout not return promise
+
+function delay(){
+  return new Promise((resolve,reject)=>{
+    
+
+    //  setTimeout(()=>{
+    //   resolve("promise resolved")
+    //  },4000)
+      // reject("promise reject")
+  })
+}
+
+const pt1=setTimeout(delay,2000);
+console.log(pt);
